@@ -1,5 +1,5 @@
 pipeline {
-    agent {label jenkins_slave}
+    agent {label 'jenkins_slave'}
 
     stages {
         stage("CODE COPY") {
