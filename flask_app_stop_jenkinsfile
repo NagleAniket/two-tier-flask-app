@@ -1,0 +1,11 @@
+pipeline {
+    agent {label 'jenkins_slave'}
+
+    stages {
+        stage("Docker Stop") {
+            steps {
+                sh 'docker compose -f /var/lib/jenkins/workspace/Flask-App-CICD/docker-compose.yml down'
+            }
+        }
+    }
+}
