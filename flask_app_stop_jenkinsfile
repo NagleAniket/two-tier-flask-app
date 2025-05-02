@@ -1,6 +1,11 @@
 pipeline {
     agent { label 'jenkins_slave' }
 
+    environment {
+        UID = '1000'  // Add relevant values for your case
+        GID = '1000'
+    }
+
     stages {
         stage("Checkout Code") {
             steps {
