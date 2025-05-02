@@ -2,7 +2,7 @@ pipeline {
     agent { label 'jenkins_slave' }
 
     environment {
-        UID = '1000'  // Add relevant values for your case
+        UID = '1000'
         GID = '1000'
     }
 
@@ -10,6 +10,13 @@ pipeline {
         stage("Checkout Code") {
             steps {
                 checkout scm
+            }
+        }
+
+        stage("Verify Files") {
+            steps {
+                sh 'pwd'  // Print the working directory
+                sh 'ls -l'  // List files to ensure docker-compose.yml is present
             }
         }
 
