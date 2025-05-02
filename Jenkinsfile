@@ -7,7 +7,12 @@ pipeline {
                 git url: "https://github.com/NagleAniket/two-tier-flask-app", branch: "master"
             }
         }
-
+        stage("Trivy File System Scan"){
+            steps{
+                sh "trivy fs . -o results.json"
+                sh "cat results.json"
+            }
+        }
         stage("PREPARE BUILD") {
             steps {
                 writeFile file: '.dockerignore', text: 'mysql-data/'
@@ -54,4 +59,9 @@ pipeline {
             }
         }
     }
+//post{
+//   success{emailext(subject: 'Build Successful', body: 'Your Build Was Completed Successful!', to: 'nagleaniket@gmail.com')}
+//    failure{emailext(subject: 'Build Failed', body: 'Your Build Was Failed!', to: 'nagleaniket@gmail.com')}
+//}
+//    
 }
